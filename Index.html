@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>VYBEON - Watch. Create. Vibe.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0b0b0f;
+      --card: #15151b;
+      --card-hover: #1e1e27;
+      --text: #ffffff;
+      --muted: #a8a8b3;
+      --border: rgba(255,255,255,.08);
+
+      --primary: #7c3cff;
+      --primary2: #ff2d95;
+      --cyan: #00d9ff;
+
+      --header-height: 68px;
+      --sidebar-width: 240px;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(124,60,255,.09), transparent 25%),
+        radial-gradient(circle at 90% 20%, rgba(255,45,149,.06), transparent 25%),
+        var(--bg);
+
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      height: var(--header-height);
+
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      padding: 0 22px;
+
+      background: rgba(11,11,15,.85);
+      backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid var(--border);
+
+      z-index: 1000;
+    }
+
+    .menu-btn {
+      width: 42px;
+      height: 42px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      border: none;
+
+      background: transparent;
+      color: white;
+
+      font-size: 22px;
+
+      transition: .2s;
+    }
+
+    .menu-btn:hover {
+      background: rgba(255,255,255,.08);
+    }
+
+    /* ================= LOGO ================= */
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      min-width: 175px;
+
+      cursor: pointer;
+    }
+
+    .brand-icon {
+      position: relative;
+
+      width: 43px;
+      height: 31px;
+
+      border-radius: 11px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary2)
+        );
+
+      box-shadow:
+        0 0 25px rgba(124,60,255,.3),
+        0 0 30px rgba(255,45,149,.15);
+    }
+
+    .brand-icon::after {
+      content: "";
+
+      position: absolute;
+
+      top: 50%;
+      left: 52%;
+
+      transform:
+        translate(-50%, -50%);
+
+      width: 0;
+      height: 0;
+
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 11px solid white;
+    }
+
+    .brand-name {
+      font-weight: 800;
+      letter-spacing: -.7px;
+      font-size: 21px;
+    }
+
+    .brand-name span {
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #d7ccff
+        );
+
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    /* ================= SEARCH ================= */
+
+    .search-section {
+      flex: 1;
+
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-wrapper {
+      width: min(650px, 100%);
+
+      display: flex;
+
+      position: relative;
+    }
+
+    .search-wrapper input {
+      width: 100%;
+
+      height: 45px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 999px;
+
+      padding: 0 58px 0 20px;
+
+      outline: none;
+
+      background: #111117;
+
+      color: white;
+
+      font-size: 15px;
+
+      transition: .25s;
+    }
+
+    .search-wrapper input:focus {
+      border-color: rgba(124,60,255,.8);
+
+      box-shadow:
+        0 0 0 3px rgba(124,60,255,.12);
+    }
+
+    .search-btn {
+      position: absolute;
+
+      right: 4px;
+      top: 4px;
+
+      width: 46px;
+      height: 37px;
+
+      border-radius: 999px;
+
+      border: none;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary2)
+        );
+
+      color: white;
+
+      font-size: 17px;
+    }
+
+    /* ================= HEADER ACTIONS ================= */
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      border: none;
+
+      background: transparent;
+      color: white;
+
+      font-size: 19px;
+
+      transition: .2s;
+    }
+
+    .icon-btn:hover {
+      background: rgba(255,255,255,.08);
+    }
+
+    .profile {
+      width: 36px;
+      height: 36px;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--cyan),
+          var(--primary),
+          var(--primary2)
+        );
+
+      display: grid;
+      place-items: center;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 0 18px rgba(124,60,255,.25);
+    }
+
+    /* ================= SIDEBAR ================= */
+
+    .sidebar {
+      position: fixed;
+
+      top: var(--header-height);
+      bottom: 0;
+      left: 0;
+
+      width: var(--sidebar-width);
+
+      padding: 14px 12px 30px;
+
+      overflow-y: auto;
+
+      background: rgba(11,11,15,.93);
+
+      border-right: 1px solid var(--border);
+
+      z-index: 900;
+
+      transition: .3s;
+    }
+
+    .sidebar.collapsed {
+      width: 80px;
+    }
+
+    .sidebar-section {
+      padding-bottom: 14px;
+      margin-bottom: 12px;
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 17px;
+
+      padding: 12px 14px;
+
+      margin: 3px 0;
+
+      border-radius: 12px;
+
+      color: #e5e5ec;
+
+      text-decoration: none;
+
+      font-size: 14px;
+      font-weight: 500;
+
+      transition: .2s;
+    }
+
+    .nav-item:hover {
+      background: rgba(255,255,255,.07);
+    }
+
+    .nav-item.active {
+      background:
+        linear-gradient(
+          90deg,
+          rgba(124,60,255,.24),
+          rgba(255,45,149,.08)
+        );
+
+      color: white;
+    }
+
+    .nav-icon {
+      width: 25px;
+      min-width: 25px;
+
+      text-align: center;
+
+      font-size: 20px;
+    }
+
+    .sidebar.collapsed .nav-text,
+    .sidebar.collapsed .section-title {
+      display: none;
+    }
+
+    .sidebar.collapsed .nav-item {
+      justify-content: center;
+      padding: 12px 5px;
+    }
+
+    .section-title {
+      padding: 10px 14px 6px;
+
+      color: var(--muted);
+
+      text-transform: uppercase;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      letter-spacing: 1.2px;
+    }
+
+    /* ================= MAIN ================= */
+
+    main {
+      margin-top: var(--header-height);
+      margin-left: var(--sidebar-width);
+
+      padding: 20px 26px 50px;
+
+      transition: .3s;
+    }
+
+    main.expanded {
+      margin-left: 80px;
+    }
+
+    /* ================= CATEGORY CHIPS ================= */
+
+    .categories {
+      display: flex;
+      gap: 10px;
+
+      overflow-x: auto;
+
+      padding: 3px 0 18px;
+
+      scrollbar-width: none;
+
+      position: sticky;
+      top: var(--header-height);
+
+      background: rgba(11,11,15,.94);
+
+      backdrop-filter: blur(15px);
+
+      z-index: 50;
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chip {
+      border: 1px solid var(--border);
+
+      padding: 9px 16px;
+
+      border-radius: 999px;
+
+      background: #17171e;
+      color: white;
+
+      white-space: nowrap;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      transition: .2s;
+    }
+
+    .chip:hover {
+      background: #252530;
+    }
+
+    .chip.active {
+      border: none;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary2)
+        );
+    }
+
+    /* ================= FEATURED ================= */
+
+    .hero {
+      position: relative;
+
+      min-height: 260px;
+
+      border-radius: 22px;
+
+      margin: 7px 0 25px;
+
+      overflow: hidden;
+
+      padding: 38px;
+
+      display: flex;
+      align-items: center;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(8,8,12,.94) 0%,
+          rgba(8,8,12,.68) 48%,
+          rgba(8,8,12,.15) 100%
+        ),
+        url("https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80");
+
+      background-position: center;
+      background-size: cover;
+
+      border: 1px solid var(--border);
+    }
+
+    .hero-content {
+      max-width: 580px;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-block;
+
+      padding: 7px 11px;
+
+      border-radius: 999px;
+
+      background: rgba(124,60,255,.22);
+
+      border: 1px solid rgba(124,60,255,.35);
+
+      margin-bottom: 14px;
+
+      color: #d7c7ff;
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      font-size: clamp(25px, 4vw, 43px);
+
+      line-height: 1.06;
+
+      margin-bottom: 12px;
+
+      letter-spacing: -1.5px;
+    }
+
+    .hero p {
+      color: #d5d5dc;
+
+      font-size: 14px;
+      line-height: 1.7;
+
+      margin-bottom: 19px;
+    }
+
+    .watch-btn {
+      border: none;
+
+      border-radius: 999px;
+
+      padding: 12px 20px;
+
+      background: white;
+
+      color: #101014;
+
+      font-weight: 800;
+
+      transition: .2s;
+    }
+
+    .watch-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* ================= VIDEO SECTION ================= */
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin: 10px 0 17px;
+    }
+
+    .section-heading h2 {
+      font-size: 21px;
+    }
+
+    .section-heading span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .video-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fill, minmax(260px, 1fr));
+
+      gap: 27px 18px;
+    }
+
+    .video-card {
+      cursor: pointer;
+    }
+
+    .thumbnail {
+      width: 100%;
+
+      aspect-ratio: 16 / 9;
+
+      border-radius: 14px;
+
+      overflow: hidden;
+
+      position: relative;
+
+      background: #202028;
+
+      border: 1px solid var(--border);
+
+      transition:
+        transform .25s,
+        box-shadow .25s;
+    }
+
+    .thumbnail img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      transition: transform .35s;
+    }
+
+    .video-card:hover .thumbnail {
+      transform: translateY(-4px);
+
+      box-shadow:
+        0 15px 35px rgba(0,0,0,.38);
+    }
+
+    .video-card:hover .thumbnail img {
+      transform: scale(1.04);
+    }
+
+    .duration {
+      position: absolute;
+
+      right: 8px;
+      bottom: 8px;
+
+      padding: 4px 6px;
+
+      border-radius: 5px;
+
+      background: rgba(0,0,0,.82);
+
+      color: white;
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .video-info {
+      display: flex;
+
+      gap: 12px;
+
+      padding-top: 12px;
+    }
+
+    .channel-avatar {
+      width: 39px;
+      height: 39px;
+
+      min-width: 39px;
+
+      border-radius: 50%;
+
+      display: grid;
+      place-items: center;
+
+      font-weight: 800;
+      font-size: 13px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary2)
+        );
+    }
+
+    .video-title {
+      font-size: 14px;
+      line-height: 1.4;
+
+      font-weight: 700;
+
+      margin-bottom: 5px;
+
+      display: -webkit-box;
+
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+
+      overflow: hidden;
+    }
+
+    .channel-name,
+    .video-stats {
+      font-size: 12.5px;
+
+      color: var(--muted);
+
+      line-height: 1.55;
+    }
+
+    /* ================= VIDEO MODAL ================= */
+
+    .video-modal {
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(0,0,0,.88);
+
+      backdrop-filter: blur(8px);
+
+      z-index: 5000;
+
+      display: none;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+    }
+
+    .video-modal.show {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(1000px, 100%);
+
+      background: #121219;
+
+      border-radius: 18px;
+
+      overflow: hidden;
+
+      border: 1px solid var(--border);
+
+      box-shadow:
+        0 30px 100px rgba(0,0,0,.7);
+    }
+
+    .player {
+      width: 100%;
+      aspect-ratio: 16/9;
+
+      background: black;
+
+      display: grid;
+      place-items: center;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    .player img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .6;
+    }
+
+    .big-play {
+      position: absolute;
+
+      width: 78px;
+      height: 78px;
+
+      border-radius: 50%;
+
+      border: none;
+
+      font-size: 29px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary2)
+        );
+
+      display: grid;
+      place-items: center;
+
+      padding-left: 5px;
+    }
+
+    .modal-details {
+      padding: 20px;
+    }
+
+    .modal-details h2 {
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    .modal-details p {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 13px;
+    }
+
+    .close-modal {
+      position: absolute;
+
+      top: 18px;
+      right: 18px;
+
+      z-index: 5100;
+
+      width: 44px;
+      height: 44px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(255,255,255,.15);
+
+      background: rgba(0,0,0,.6);
+
+      color: white;
+
+      font-size: 22px;
+    }
+
+    /* ================= MOBILE ================= */
+
+    .mobile-nav {
+      display: none;
+    }
+
+    @media(max-width: 850px) {
+      header {
+        padding: 0 12px;
+        gap: 8px;
+      }
+
+      .brand {
+        min-width: unset;
+      }
+
+      .brand-name {
+        display: none;
+      }
+
+      .header-actions .hide-mobile {
+        display: none;
+      }
+
+      .sidebar {
+        transform: translateX(-100%);
+
+        width: 240px;
+
+        box-shadow:
+          20px 0 50px rgba(0,0,0,.4);
+      }
+
+      .sidebar.mobile-open {
+        transform: translateX(0);
+      }
+
+      main,
+      main.expanded {
+        margin-left: 0;
+
+        padding: 16px 13px 85px;
+      }
+
+      .hero {
+        min-height: 220px;
+        padding: 25px;
+      }
+
+      .video-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+
+        gap: 23px 12px;
+      }
+
+      .video-title {
+        font-size: 13px;
+      }
+
+      .channel-avatar {
+        width: 34px;
+        height: 34px;
+
+        min-width: 34px;
+      }
+
+      .mobile-nav {
+        position: fixed;
+
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        height: 64px;
+
+        z-index: 2000;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        background: rgba(12,12,16,.95);
+
+        backdrop-filter: blur(15px);
+
+        border-top: 1px solid var(--border);
+      }
+
+      .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        color: var(--muted);
+
+        gap: 4px;
+
+        font-size: 10px;
+      }
+
+      .mobile-nav-item .nav-icon {
+        font-size: 19px;
+      }
+
+      .mobile-nav-item.active {
+        color: white;
+      }
+    }
+
+    @media(max-width: 560px) {
+      .search-wrapper input {
+        padding-left: 14px;
+      }
+
+      .hero {
+        min-height: 200px;
+        margin-bottom: 20px;
+      }
+
+      .hero p {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 26px;
+      }
+
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .thumbnail {
+        border-radius: 12px;
+      }
+    }
+
+    /* ================= SCROLLBAR ================= */
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #34343d;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+  <button class="menu-btn" id="menuBtn">
+    ☰
+  </button>
+
+  <div class="brand">
+    <div class="brand-icon"></div>
+
+    <div class="brand-name">
+      <span>VYBEON</span>
+    </div>
+  </div>
+
+  <div class="search-section">
+    <div class="search-wrapper">
+
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Search videos..."
+      />
+
+      <button
+        class="search-btn"
+        id="searchBtn"
+      >
+        🔍
+      </button>
+
+    </div>
+  </div>
+
+  <div class="header-actions">
+
+    <button class="icon-btn hide-mobile">
+      ＋
+    </button>
+
+    <button class="icon-btn hide-mobile">
+      🔔
+    </button>
+
+    <div class="profile">
+      V
+    </div>
+
+  </div>
+
+</header>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar" id="sidebar">
+
+  <div class="sidebar-section">
+
+    <a href="#" class="nav-item active">
+      <span class="nav-icon">⌂</span>
+      <span class="nav-text">Home</span>
+    </a>
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">⚡</span>
+      <span class="nav-text">Shorts</span>
+    </a>
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">▣</span>
+      <span class="nav-text">Subscriptions</span>
+    </a>
+
+  </div>
+
+
+  <div class="sidebar-section">
+
+    <div class="section-title">
+      You
+    </div>
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">◷</span>
+      <span class="nav-text">History</span>
+    </a>
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">▤</span>
+      <span class="nav-text">Playlists</span>
+    </a>
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">▶</span>
+      <span class="nav-text">Your Videos</span>
+    </a>
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">♡</span>
+      <span class="nav-text">Liked Videos</span>
+    </a>
+
+  </div>
+
+
+  <div class="sidebar-section">
+
+    <div class="section-title">
+      Explore
+    </div>
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">🔥</span>
+      <span class="nav-text">Trending</span>
+    </a>
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">♫</span>
+      <span class="nav-text">Music</span>
+    </a>
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">🎮</span>
+      <span class="nav-text">Gaming</span>
+    </a>
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">🏆</span>
+      <span class="nav-text">Sports</span>
+    </a>
+
+  </div>
+
+</aside>
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main id="mainContent">
+
+  <div class="categories">
+
+    <button class="chip active" data-category="All">
+      All
+    </button>
+
+    <button class="chip" data-category="Music">
+      Music
+    </button>
+
+    <button class="chip" data-category="Gaming">
+      Gaming
+    </button>
+
+    <button class="chip" data-category="Technology">
+      Technology
+    </button>
+
+    <button class="chip" data-category="Coding">
+      Coding
+    </button>
+
+    <button class="chip" data-category="Travel">
+      Travel
+    </button>
+
+    <button class="chip" data-category="Sports">
+      Sports
+    </button>
+
+    <button class="chip" data-category="Education">
+      Education
+    </button>
+
+  </div>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="hero-badge">
+        ✦ VYBEON ORIGINAL
+      </div>
+
+      <h1>
+        Watch what you love.
+        Discover what’s next.
+      </h1>
+
+      <p>
+        Explore creators, music, gaming,
+        technology, entertainment and more
+        on your new video universe.
+      </p>
+
+      <button
+        class="watch-btn"
+        onclick="openFeatured()"
+      >
+        ▶ Watch Now
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <div class="section-heading">
+
+    <h2>
+      Recommended for you
+    </h2>
+
+    <span id="resultText">
+      Fresh picks
+    </span>
+
+  </div>
+
+  <section
+    class="video-grid"
+    id="videoGrid"
+  ></se
